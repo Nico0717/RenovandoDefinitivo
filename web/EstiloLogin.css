@@ -1,0 +1,26 @@
+body{
+    background: url(Imagenes/FondoPrincipal.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    
+}
+
+#tabla1{
+    background: #FF7F00;
+    border: 2px solid #B6C84B;
+    border-radius: 10px; 
+    color: #666666;
+    aling: center;
+    width: 220px;
+    height: 350px;
+}
+
+#BotonIngresar{
+    padding-right: 30px; 
+    padding-left: 30px; 
+    padding-top: 10px; 
+    padding-bottom: 10px;
+}
+
