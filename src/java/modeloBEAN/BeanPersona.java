@@ -13,7 +13,7 @@ import java.sql.*;
 
 public class BeanPersona extends util.Conexion{
 
-    public BeanPersona(int idPersona, int Usuario_idUsuario, int Documento, String Tipo_Documento, int Num_Franquicia, String Telefono, String Correo, String Ocupacion, String Nombre, String Nombre_2, String Apellido_1, String Apellido_2, Date Fecha_De_Nacimiento, Boolean Genero, String Parentezco, String Direccion, String Tipo_Vivienda, Boolean Representante) {
+    public BeanPersona(int idPersona, int Usuario_idUsuario, String Documento, String Tipo_Documento, int Num_Franquicia, String Telefono, String Correo, String Ocupacion, String Nombre, String Nombre_2, String Apellido_1, String Apellido_2, Date Fecha_De_Nacimiento, Boolean Genero, String Parentezco, String Direccion, String Tipo_Vivienda, Boolean Representante) {
         this.idPersona = idPersona;
         this.Usuario_idUsuario = Usuario_idUsuario;
         this.Documento = Documento;
@@ -60,11 +60,11 @@ public class BeanPersona extends util.Conexion{
         this.Usuario_idUsuario = Usuario_idUsuario;
     }
 
-    public int getDocumento() {
+    public String getDocumento() {
         return Documento;
     }
 
-    public void setDocumento(int Documento) {
+    public void setDocumento(String Documento) {
         this.Documento = Documento;
     }
 
@@ -191,7 +191,7 @@ public class BeanPersona extends util.Conexion{
     
     private int idPersona;
     private int Usuario_idUsuario;
-    private int Documento;
+    private String Documento;
     private String Tipo_Documento;
     private int Num_Franquicia;
     private String Telefono;

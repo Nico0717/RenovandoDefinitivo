@@ -65,6 +65,7 @@
 
 
             <div class="well">
+                
                 <table class="table" id="LISTARUSU">
                     <thead>
                         <tr>
@@ -83,19 +84,18 @@
                     </thead>
                     <tbody>
                         <%
-                            
-                            
-                            BeanPersona BPBP= new BeanPersona();
+
+                            BeanPersona BPBP = new BeanPersona();
                             DaoPersona DPDP = new DaoPersona(BPBP);
                             ArrayList<BeanPersona> Lista = DPDP.ConsultarPersona();
-                            
-                            for(int a = 0;a <Lista.size();a++){
+
+                            for (int a = 0; a < Lista.size(); a++) {
                                 BPBP = Lista.get(a);
-                            
+
                         %>
 
                         <tr>
-                            
+
                             <td><%=a%></td>
                             <td><%=BPBP.getDocumento()%></td>
                             <td><%=BPBP.getNombre()%></td>
@@ -105,7 +105,7 @@
                             <td><%=BPBP.getFecha_De_Nacimiento()%></td>
                             <td><button type="submit" class="btn btn-primary glyphicon glyphicon-pencil"></button></td>
                         </tr>
-                        <%}%>
+                        <%}%>                        
                     </tbody>
                 </table>
             </div>

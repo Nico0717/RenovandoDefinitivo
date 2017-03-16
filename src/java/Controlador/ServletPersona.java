@@ -41,7 +41,7 @@ public class ServletPersona extends HttpServlet {
         
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
         int Usuario_idUsuario = Integer.parseInt(request.getParameter("Usuario_idUsuario"));
-        int Documento = Integer.parseInt(request.getParameter("Documento"));
+        String Documento = request.getParameter("Documento");
         String Tipo_Documento = request.getParameter("Tipo_Documento");
         int Num_Franquicia = Integer.parseInt(request.getParameter("Num_Franquicia"));
         String Telefono = request.getParameter("Telefono");
