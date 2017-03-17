@@ -110,6 +110,17 @@
                     </tr>
                     <%}%>                        
                     </tbody>
+                    
+                    <input type="hidden" name="#" value="1">
+                    <input type="hidden" name="Documento" value="2">
+                    <input type="hidden" name="Nombre" value="3">
+                    <input type="hidden" name="Nombre_2" value="4">
+                    <input type="hidden" name="Apellido_1" value="5">
+                    <input type="hidden" name="Apellido_2" value="6">
+                    <input type="hidden" name="Fecha_De_Nacimiento" value="7">
+                    
+                    
+                    
                 </table>
             </div>
         </div>

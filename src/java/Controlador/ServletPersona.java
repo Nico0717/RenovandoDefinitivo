@@ -38,83 +38,136 @@ public class ServletPersona extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         int opcion = Integer.parseInt(request.getParameter("textOpcion"));
-       
-        
-        int idPersona = Integer.parseInt(request.getParameter("idPersona"));
-        int Usuario_idUsuario = Integer.parseInt(request.getParameter("Usuario_idUsuario"));
-        String Documento = request.getParameter("Documento");
-        String Tipo_Documento = request.getParameter("Tipo_Documento");
-        int Num_Franquicia = Integer.parseInt(request.getParameter("Num_Franquicia"));
-        String Telefono = request.getParameter("Telefono");
-        String Correo = request.getParameter("Correo");
-        String Ocupacion = request.getParameter("Ocupacion");
-        String Nombre = request.getParameter("Nombre");
-        String Nombre_2 = request.getParameter("Nombre_2");
-        String Apellido_1 = request.getParameter("Apellido_1");
-        String Apellido_2 = request.getParameter("Apellido_2");
-        Date Fecha_De_Nacimiento = Date.valueOf(request.getParameter("Fecha_De_Nacimiento"));
-        Boolean Genero = Boolean.valueOf( request.getParameter("Genero"));
-        String Parentezco = request.getParameter("Parentezco");
-        String Direccion = request.getParameter("Direccion");
-        String Tipo_Vivienda = request.getParameter("Tipo_Vivienda");
-        Boolean Representante = Boolean.valueOf(request.getParameter("Representante"));
-        
-            
+
+        int idPersona;
+        int Usuario_idUsuario;
+        String Documento;
+        String Tipo_Documento;
+        int Num_Franquicia;
+        String Telefono;
+        String Correo;
+        String Ocupacion;
+        String Nombre;
+        String Nombre_2;
+        String Apellido_1;
+        String Apellido_2;
+        Date Fecha_De_Nacimiento;
+        Boolean Genero;
+        String Parentezco;
+        String Direccion;
+        String Tipo_Vivienda;
+        Boolean Representante ;
+
         BeanPersona BPerson = new BeanPersona();
         DaoPersona DPerson = new DaoPersona(BPerson);
-                   
+
         ResultSet rs;
 
-            switch (opcion) {
-                case 1: //agregar registro
-                    if (DPerson.AgregarRegistro()) {
-                        request.setAttribute("Exitoso", "<script> alert('Los Datos fueron Agegados correctamente') </script> ");
+        switch (opcion) {
+            case 1: //agregar registro
 
-                    } else {
-                        request.setAttribute("Error", "<script> alert('Los Datos no fueron registrados') </script>");
-                    }
+                idPersona = Integer.parseInt(request.getParameter("idPersona"));
+                Usuario_idUsuario = Integer.parseInt(request.getParameter("Usuario_idUsuario"));
+                Tipo_Documento = request.getParameter("Tipo_Documento");
+                Documento = request.getParameter("Documento");
+                Num_Franquicia = Integer.parseInt(request.getParameter("Num_Franquicia"));
+                Telefono = request.getParameter("Telefono");
+                Correo = request.getParameter("Correo");
+                Ocupacion = request.getParameter("Ocupacion");
+                Nombre = request.getParameter("Nombre");
+                Nombre_2 = request.getParameter("Nombre_2");
+                Apellido_1 = request.getParameter("Apellido_1");
+                Apellido_2 = request.getParameter("Apellido_2");
+                Fecha_De_Nacimiento = Date.valueOf(request.getParameter("Fecha_De_Nacimiento"));
+                Genero = Boolean.valueOf(request.getParameter("Genero"));
+                Parentezco = request.getParameter("Parentezco");
+                Direccion = request.getParameter("Direccion");
+                Tipo_Vivienda = request.getParameter("Tipo_Vivienda");
+                Representante = Boolean.valueOf(request.getParameter("Representante"));
 
-                    request.getRequestDispatcher("registrar_carro.jsp").forward(request, response);
-                    break;
+                if (DPerson.AgregarRegistro()) {
 
-                case 2: //actualizar Persona
+                    request.setAttribute("Exitoso", "<script> alert('Los Datos fueron Agegados correctamente') </script> ");
 
-                    if (DPerson.ActualizarRegistro()) {
+                } else {
+                    request.setAttribute("Error", "<script> alert('Los Datos no fueron registrados') </script>");
+                }
 
-                        request.setAttribute("Exito", "<script> alert('Los Datos De Persona Se Actualizaron con exito') </script>");
-                        request.getRequestDispatcher("menu.jsp").forward(request, response);
+                request.getRequestDispatcher("registrar_carro.jsp").forward(request, response);
+                break;
 
-                    } else {
-                        request.setAttribute("Error", "<script> alert ('Los Datos No se han Guardado Correctamente') </script>");
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                    }
-                    break;
-                    
-                    case 3: //actualizar Persona
+            case 2: //actualizar Persona
 
-                    if (DPerson.ConsultarRegistro()) {
-                        
-                        request.getRequestDispatcher("Consultar.jsp").forward(request, response);
-                        
-                    } else {
-                        request.setAttribute("Error", "<script> alert ('Los Datos No se han Consultado Correctamente') </script>");
-                        
-                    }
-                    break;
+                idPersona = Integer.parseInt(request.getParameter("idPersona"));
+                Usuario_idUsuario = Integer.parseInt(request.getParameter("Usuario_idUsuario"));
+                Tipo_Documento = request.getParameter("Tipo_Documento");
+                Documento = request.getParameter("Documento");
+                Num_Franquicia = Integer.parseInt(request.getParameter("Num_Franquicia"));
+                Telefono = request.getParameter("Telefono");
+                Correo = request.getParameter("Correo");
+                Ocupacion = request.getParameter("Ocupacion");
+                Nombre = request.getParameter("Nombre");
+                Nombre_2 = request.getParameter("Nombre_2");
+                Apellido_1 = request.getParameter("Apellido_1");
+                Apellido_2 = request.getParameter("Apellido_2");
+                Fecha_De_Nacimiento = Date.valueOf(request.getParameter("Fecha_De_Nacimiento"));
+                Genero = Boolean.valueOf(request.getParameter("Genero"));
+                Parentezco = request.getParameter("Parentezco");
+                Direccion = request.getParameter("Direccion");
+                Tipo_Vivienda = request.getParameter("Tipo_Vivienda");
+                Representante = Boolean.valueOf(request.getParameter("Representante"));
 
-                    case 4:
-                        if (DPerson.EditarP()) {
-                            
-                            request.getRequestDispatcher("Editar.jsp").forward(request, response);
-                            
-                        } else {
-                            
-                            request.setAttribute("Error", "<script> alert ('Los Datos No se han Traido Correctamente') </script>");
-                        }
-            break;
-            
-            
-            
+                if (DPerson.ActualizarRegistro()) {
+
+                    request.setAttribute("Exito", "<script> alert('Los Datos De Persona Se Actualizaron con exito') </script>");
+                    request.getRequestDispatcher("menu.jsp").forward(request, response);
+
+                } else {
+                    request.setAttribute("Error", "<script> alert ('Los Datos No se han Guardado Correctamente') </script>");
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                }
+                break;
+
+            case 3: //Consultar Persona
+                
+                
+                Documento = request.getParameter("Documento");
+                Nombre = request.getParameter("Nombre");
+                Nombre_2 = request.getParameter("Nombre_2");
+                Apellido_1 = request.getParameter("Apellido_1");
+                Apellido_2 = request.getParameter("Apellido_2");
+                Fecha_De_Nacimiento = Date.valueOf(request.getParameter("Fecha_De_Nacimiento"));
+
+                if (DPerson.ConsultarRegistro()) {
+
+                    request.getRequestDispatcher("Consultar.jsp").forward(request, response);
+
+                } else {
+                    request.setAttribute("Error", "<script> alert ('Los Datos No se han Consultado Correctamente') </script>");
+
+                }
+                break;
+
+            case 4:
+
+                //idPersona = Integer.parseInt(request.getParameter("idPersona"));
+                Tipo_Documento = request.getParameter("Tipo_Documento");
+                Documento = request.getParameter("Documento");
+                Nombre = request.getParameter("Nombre");
+                Nombre_2 = request.getParameter("Nombre_2");
+                Apellido_1 = request.getParameter("Apellido_1");
+                Apellido_2 = request.getParameter("Apellido_2");
+
+                if (DPerson.EditarP()) {
+
+                    request.getRequestDispatcher("Editar.jsp").forward(request, response);
+
+                } else {
+
+                    request.setAttribute("Error", "<script> alert ('Los Datos No se han Traido Correctamente') </script>");
+                }
+                break;
+
         }
     }
 

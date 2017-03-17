@@ -46,8 +46,8 @@
 
                             BeanPersona BPBP = new BeanPersona();
                             DaoPersona DPDP = new DaoPersona(BPBP);
-                            int idPersona = BPBP.getIdPersona();
-                            ArrayList<BeanPersona> Lista = DPDP.EditarPersona(idPersona);
+                            String Documento = DPDP.Documento;
+                            ArrayList<BeanPersona> Lista = DPDP.EditarPersona(Documento);
 
                             
                                 BPBP = Lista.get(BPBP.getIdPersona());

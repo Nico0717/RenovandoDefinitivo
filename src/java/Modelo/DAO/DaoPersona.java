@@ -139,7 +139,7 @@ public class DaoPersona extends Conexion implements InterfaceCRUD {
     }
 
     
-        public ArrayList<BeanPersona> EditarPersona(int idPersona) {
+        public ArrayList<BeanPersona> EditarPersona(String Documento) {
             
         Conexion conex = new Conexion();
         ArrayList<BeanPersona> Listar = new ArrayList<>();
@@ -148,7 +148,7 @@ public class DaoPersona extends Conexion implements InterfaceCRUD {
             st = conex.ObtenerConexion().createStatement();
 
             CallableStatement procedure = conexion.prepareCall("Call EditarPersona(?)");
-            procedure.setInt(1, idPersona);
+            procedure.setString(1, Documento);
             procedure.execute();
             rs = procedure.getResultSet();
 
@@ -202,7 +202,7 @@ public class DaoPersona extends Conexion implements InterfaceCRUD {
     
     public boolean EditarP(){
         try{
-            EditarPersona(idPersona);
+            EditarPersona(Documento);
             listo=true;
             
         }catch(Exception ex){
