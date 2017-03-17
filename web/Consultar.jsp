@@ -65,7 +65,7 @@
 
 
             <div class="well">
-                
+
                 <table class="table" id="LISTARUSU">
                     <thead>
                         <tr>
@@ -103,9 +103,12 @@
                             <td><%=BPBP.getApellido_1()%></td>
                             <td><%=BPBP.getApellido_2()%></td>
                             <td><%=BPBP.getFecha_De_Nacimiento()%></td>
-                            <td><button type="submit" class="btn btn-primary glyphicon glyphicon-pencil"></button></td>
-                        </tr>
-                        <%}%>                        
+                            <td><form action="ServletPersona" method="Post">
+                        <input type="hidden" name="textOpcion" value="4">
+                        <a href=""><button type="submit" class="btn btn-primary glyphicon glyphicon-pencil"></button></a>
+                    </form></td>
+                    </tr>
+                    <%}%>                        
                     </tbody>
                 </table>
             </div>

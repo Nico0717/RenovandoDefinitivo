@@ -18,7 +18,7 @@ public class DaoPersona extends Conexion implements InterfaceCRUD {
     public boolean listo = false;
 
 //   BeanPersona Bperson;
-   public int idPersona;
+    public int idPersona;
     public int Usuario_idUsuario;
     public String Documento;
     public String Tipo_Documento;
@@ -37,13 +37,10 @@ public class DaoPersona extends Conexion implements InterfaceCRUD {
     public String Tipo_Vivienda;
     public Boolean Representante;
 
-    
-    public DaoPersona()
-    {
-        
+    public DaoPersona() {
+
     }
-            
-    
+
     public DaoPersona(BeanPersona OjbPers) {
 
         super();
@@ -79,7 +76,7 @@ public class DaoPersona extends Conexion implements InterfaceCRUD {
     @Override
     public boolean ActualizarRegistro() {
         try {
-            st.executeUpdate("update Persona set Documento='" + Documento + "', Tipo_Documento='" + Tipo_Documento + "', Num_Franquicia='" + Num_Franquicia + "', Telefono='" + Telefono + "', Correo='" + Correo + "', Ocupacion='" + Ocupacion + "', Nombre='" + Nombre + "', Nombre_2='" + Nombre_2 + "', Apellido_1='" + Apellido_1 + "', Apellido_2='" + Apellido_2 + "', Fecha_De_Nacimiento='" + Fecha_De_Nacimiento + "', Genero='" + Genero + "', Parentezco='" + Parentezco + "', Dirreccion='" + Direccion + "', Tipo_Vivienda='" + Tipo_Vivienda + "', Representante='" + Representante + "' where idPersona ='" + idPersona + "';");
+            st.executeUpdate("update Persona set Documento='" + Documento + "', Tipo_Documento='" + Tipo_Documento + "', Num_Franquicia='" + Num_Franquicia + "', Telefono='" + Telefono + "', Correo='" + Correo + "', Ocupacion='" + Ocupacion + "', Nombre='" + Nombre + "', Nombre_2='" + Nombre_2 + "', Apellido_1='" + Apellido_1 + "', Apellido_2='" + Apellido_2 + "', Fecha_De_Nacimiento='" + Fecha_De_Nacimiento + "' where idPersona ='" + idPersona + "';");
             listo = true;
 
         } catch (Exception ex) {
@@ -94,56 +91,107 @@ public class DaoPersona extends Conexion implements InterfaceCRUD {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    
     public ArrayList<BeanPersona> ConsultarPersona() {
-        
+
         Conexion conex = new Conexion();
         ArrayList<BeanPersona> Listar = new ArrayList<>();
         try {
-            
+
             st = conex.ObtenerConexion().createStatement();
-            
+
             CallableStatement procedure = conexion.prepareCall("Call ConsultaPersona()");
             //procedure.registerOutParameter(1, idPersona);
             procedure.execute();
-            rs=procedure.getResultSet();
-            
-            while(rs.next()){
-            
-                
+            rs = procedure.getResultSet();
+
+            while (rs.next()) {
+
+                idPersona = Integer.parseInt(rs.getString("idPersona"));
                 Documento = rs.getString("Documento");
                 Nombre = rs.getString("Nombre");
                 Nombre_2 = rs.getString("Nombre_2");
                 Apellido_1 = rs.getString("Apellido_1");
                 Apellido_2 = rs.getString("Apellido_2");
                 Fecha_De_Nacimiento = Date.valueOf(rs.getString("Fecha_De_Nacimiento"));
-                
-                
+
                 BeanPersona Bperson = new BeanPersona();
-                
-                
+
+                Bperson.setIdPersona(idPersona);
                 Bperson.setDocumento(Documento);
                 Bperson.setNombre(Nombre);
                 Bperson.setNombre_2(Nombre_2);
                 Bperson.setApellido_1(Apellido_1);
                 Bperson.setApellido_2(Apellido_2);
                 Bperson.setFecha_De_Nacimiento(Fecha_De_Nacimiento);
-                
+
                 Listar.add(Bperson);
-            }
+                
+            }rs.close();
 
         } catch (Exception ex) {
-            System.out.println("El error es: " +ex.getMessage());
+            System.out.println("El error es: " + ex.getMessage());
         }
         
-return Listar;
+        
+
+        return Listar;
 
     }
+
+    
+        public ArrayList<BeanPersona> EditarPersona(int idPersona) {
+            
+        Conexion conex = new Conexion();
+        ArrayList<BeanPersona> Listar = new ArrayList<>();
+        try {
+
+            st = conex.ObtenerConexion().createStatement();
+
+            CallableStatement procedure = conexion.prepareCall("Call EditarPersona(?)");
+            procedure.setInt(1, idPersona);
+            procedure.execute();
+            rs = procedure.getResultSet();
+
+            while (rs.next()) {
+
+                idPersona = Integer.parseInt(rs.getString("idPersona"));
+                Documento = rs.getString("Documento");
+                Nombre = rs.getString("Nombre");
+                Nombre_2 = rs.getString("Nombre_2");
+                Apellido_1 = rs.getString("Apellido_1");
+                Apellido_2 = rs.getString("Apellido_2");
+                Fecha_De_Nacimiento = Date.valueOf(rs.getString("Fecha_De_Nacimiento"));
+
+                BeanPersona Bperson = new BeanPersona();
+
+                Bperson.setIdPersona(idPersona);
+                Bperson.setDocumento(Documento);
+                Bperson.setNombre(Nombre);
+                Bperson.setNombre_2(Nombre_2);
+                Bperson.setApellido_1(Apellido_1);
+                Bperson.setApellido_2(Apellido_2);
+                Bperson.setFecha_De_Nacimiento(Fecha_De_Nacimiento);
+
+                Listar.add(Bperson);
+            }rs.close();
+
+        } catch (Exception ex) {
+            System.out.println("El error es: " + ex.getMessage());
+        }
+        
+        
+
+        return Listar;
+
+    }
+    
+    
+
 
     public boolean ConsultarRegistro() {
         try {
             ConsultarPersona();
-           // request
+            // request
             listo = true;
 
         } catch (Exception ex) {
@@ -152,4 +200,14 @@ return Listar;
         return listo;
     }
     
+    public boolean EditarP(){
+        try{
+            EditarPersona(idPersona);
+            listo=true;
+            
+        }catch(Exception ex){
+            Logger.getLogger(DaoPersona.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listo;
+    }
 }

@@ -29,9 +29,9 @@
 
                             <br><br>
                             Usuario: <br>
-                            <input type="text" name ="textusuario"><br><br>
+                            <input type="text" name ="textusuario" required="true"><br><br>
                             contraseña:<br>
-                            <input type="password" name ="textclave"><br><br>
+                            <input type="password" name ="textclave" required="true"><br><br>
                             <br><button id="BotonIngresar"> 
                                 Ingresar
                             </button><br><br>

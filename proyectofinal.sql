@@ -7,9 +7,11 @@ DELIMITER $$
 -- Procedimientos
 --
 CREATE DEFINER=`root`@`localhost` PROCEDURE `ConsultaPersona` ()  NO SQL
-BEGIN 
+BEGIN
 
-SELECT idPersona, Documento, Nombre, Nombre_2,Apellido_1, Apellido_2, Fecha_De_Nacimiento from persona  where idPersona=" +b+ ";
+select Documento, Nombre, Nombre_2, Apellido_1, Apellido_2, Fecha_De_Nacimiento from persona 
+
+;
 
 END$$
 
@@ -54,7 +56,7 @@ CREATE TABLE `entrada` (
   `Telefono` varchar(20) NOT NULL,
   `IVA` float NOT NULL,
   `Total` int(10) UNSIGNED NOT NULL,
-  `Consignado` tinyint(1) NOT NULL,
+  `Consignado` bit(1) NOT NULL,
   `Puntos_Totales` int(10) UNSIGNED NOT NULL,
   `Saldo` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -64,7 +66,7 @@ CREATE TABLE `entrada` (
 --
 
 INSERT INTO `entrada` (`idFactura`, `Id_Empleado`, `Persona_idPersona`, `Fecha_Hora`, `Mensaje`, `Telefono`, `IVA`, `Total`, `Consignado`, `Puntos_Totales`, `Saldo`) VALUES
-(1, 1, 1, '2017-02-22', 'Gracias por todo', '32123123123', 1, 3000, 1, 0, 0);
+(1, 1, 1, '2017-02-22', 'Gracias por todo', '32123123123', 1, 3000, b'1', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -142,14 +144,14 @@ CREATE TABLE `persona` (
   `Nombre_2` varchar(20) DEFAULT NULL,
   `Apellido_1` varchar(20) NOT NULL,
   `Apellido_2` varchar(20) NOT NULL,
-  `Genero` tinyint(1) NOT NULL,
+  `Genero` bit(1) NOT NULL,
   `Telefono` varchar(20) NOT NULL,
   `Ocupacion` varchar(20) NOT NULL,
   `Direccion` varchar(45) NOT NULL,
   `Correo` varchar(45) NOT NULL,
   `Fecha_De_Nacimiento` date NOT NULL,
   `Tipo_Vivienda` varchar(20) NOT NULL,
-  `Representante` tinyint(1) NOT NULL,
+  `Representante` bit(1) NOT NULL,
   `Parentezco` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -158,9 +160,9 @@ CREATE TABLE `persona` (
 --
 
 INSERT INTO `persona` (`idPersona`, `Usuario_idUsuario`, `Documento`, `Tipo_Documento`, `Num_Franquicia`, `Nombre`, `Nombre_2`, `Apellido_1`, `Apellido_2`, `Genero`, `Telefono`, `Ocupacion`, `Direccion`, `Correo`, `Fecha_De_Nacimiento`, `Tipo_Vivienda`, `Representante`, `Parentezco`) VALUES
-(1, 1, '12345678', 'C.C', 1, 'Jose', 'Daniel', 'Lopez', 'Cortecero', 1, '3142357734', 'analista de negocios', 'Call 26 55c 33', '344@misena.edu.co', '1999-04-04', 'Apartamento', 1, ''),
-(2, 2, '99051707024', 'T.I', 2, 'Nicolas', NULL, 'Beltran', 'Chaparro', 1, '3002589503', 'Estudiante', 'Cra 73 c bis #39 a 15 sur', 'nbeltran42@misena.edu.co', '1999-05-17', 'Apartamento', 0, 'Hijo'),
-(3, 2, '1488888', 'cc', 3, 'hola', 'como', 'estas', 'papu', 1, '111111', 'Empleado', 'Cra', 'nnn@mamama', '2016-11-08', 'casa', 0, 'Papa');
+(1, 1, '12345678', 'C.C', 1, 'Jose', 'Daniel', 'Lopez', 'Cortecero', b'1', '3142357734', 'analista de negocios', 'Call 26 55c 33', '344@misena.edu.co', '1999-04-04', 'Apartamento', b'1', ''),
+(2, 2, '99051707024', 'T.I', 2, 'Nicolas', '', 'Beltran', 'Chaparro', b'1', '3002589503', 'Estudiante', 'Cra 73 c bis #39 a 15 sur', 'nbeltran42@misena.edu.co', '1999-05-17', 'Apartamento', b'0', 'Hijo'),
+(3, 2, '1488888', 'cc', 3, 'hola', 'como', 'estas', 'papu', b'1', '111111', 'Empleado', 'Cra', 'nnn@mamama', '2016-11-08', 'casa', b'0', 'Papa');
 
 -- --------------------------------------------------------
 
@@ -204,7 +206,7 @@ CREATE TABLE `usuario` (
   `Usuario` varchar(20) NOT NULL,
   `Contraseña` varchar(20) NOT NULL,
   `Valor` int(10) UNSIGNED NOT NULL,
-  `Estado` tinyint(1) NOT NULL
+  `Estado` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -212,8 +214,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`idUsuario`, `Usuario`, `Contraseña`, `Valor`, `Estado`) VALUES
-(1, 'juanito', '1234', 0, 1),
-(2, 'Nico', 'Nico', 0, 1);
+(1, 'juanito', '1234', 0, b'1'),
+(2, 'Nico', 'Nico', 0, b'1');
 
 -- --------------------------------------------------------
 
@@ -224,7 +226,7 @@ INSERT INTO `usuario` (`idUsuario`, `Usuario`, `Contraseña`, `Valor`, `Estado`)
 CREATE TABLE `usuario_has_rol` (
   `Usuario_idUsuario` int(10) UNSIGNED NOT NULL,
   `Rol_idRol` int(10) UNSIGNED NOT NULL,
-  `Estado` tinyint(1) NOT NULL
+  `Estado` bit(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -232,7 +234,7 @@ CREATE TABLE `usuario_has_rol` (
 --
 
 INSERT INTO `usuario_has_rol` (`Usuario_idUsuario`, `Rol_idRol`, `Estado`) VALUES
-(1, 1, 1);
+(1, 1, b'1');
 
 --
 -- Índices para tablas volcadas
@@ -331,7 +333,7 @@ ALTER TABLE `material`
 -- AUTO_INCREMENT de la tabla `persona`
 --
 ALTER TABLE `persona`
-  MODIFY `idPersona` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idPersona` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `rol`
 --

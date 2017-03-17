@@ -38,6 +38,7 @@ public class ServletPersona extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         int opcion = Integer.parseInt(request.getParameter("textOpcion"));
+       
         
         int idPersona = Integer.parseInt(request.getParameter("idPersona"));
         int Usuario_idUsuario = Integer.parseInt(request.getParameter("Usuario_idUsuario"));
@@ -59,7 +60,7 @@ public class ServletPersona extends HttpServlet {
         Boolean Representante = Boolean.valueOf(request.getParameter("Representante"));
         
             
-        BeanPersona BPerson = new BeanPersona(idPersona, Usuario_idUsuario, Documento, Tipo_Documento, Num_Franquicia, Telefono, Correo, Ocupacion, Nombre, Nombre_2, Apellido_1, Apellido_2, Fecha_De_Nacimiento, Genero, Parentezco, Direccion, Tipo_Vivienda, Representante);
+        BeanPersona BPerson = new BeanPersona();
         DaoPersona DPerson = new DaoPersona(BPerson);
                    
         ResultSet rs;
@@ -101,17 +102,16 @@ public class ServletPersona extends HttpServlet {
                     }
                     break;
 
-//                case 3:// Consultar Persona
-//                    BeanPersona bcarro = BeanPersona.consultarRegistro(idPersona);
-//                    if (bcarro != null) {
-//                        request.setAttribute("bcarro", bcarro);
-//                        request.getRequestDispatcher("Actualizar_vehiculo.jsp").forward(request, response);
-//
-//                    } else {
-//                        request.setAttribute("Error", "<script> alert ('No se encontro el vehiculo') </script>");
-//                        request.getRequestDispatcher("Consultar_carro.jsp").forward(request, response);
-//                    }
-            
+                    case 4:
+                        if (DPerson.EditarP()) {
+                            
+                            request.getRequestDispatcher("Editar.jsp").forward(request, response);
+                            
+                        } else {
+                            
+                            request.setAttribute("Error", "<script> alert ('Los Datos No se han Traido Correctamente') </script>");
+                        }
+            break;
             
             
             

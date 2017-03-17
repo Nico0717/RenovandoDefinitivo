@@ -21,10 +21,11 @@
         <link href="source/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
         <link href="source/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <link href="source/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
     </head>
     <body>
         <div class="well">
-            <table class="table">
+            <table class="table" id="LISTAR">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -41,54 +42,31 @@
                     </tr>
                 </thead>
                 <tbody>
+                        <%
 
-                    <%
+                            BeanPersona BPBP = new BeanPersona();
+                            DaoPersona DPDP = new DaoPersona(BPBP);
+                            int idPersona = BPBP.getIdPersona();
+                            ArrayList<BeanPersona> Lista = DPDP.EditarPersona(idPersona);
 
-                        try {
-                            Conexion conex = new Conexion();
-                            Connection con = conex.ObtenerConexion();
-                            Statement st = con.createStatement();
-                             String Query = "SELECT idPersona, Documento, Nombre, Nombre_2, Apellido_1, Apellido_2, Fecha_De_Nacimiento from persona  where idPersona=";
-                            for (int b = 1; b <= 7; b++) {
-                                ResultSet rs = st.executeQuery(Query+b );
+                            
+                                BPBP = Lista.get(BPBP.getIdPersona());
                                 
 
-                    %>
-                    <tr>
-                        <th>
-                            <%                                if (!rs.next()) {
+                        %>
 
-                                            out.println("<option value=\"" + rs.getString(1) + "Selected>No hay datos</option>");
+                        <tr>
 
-                                        } else {
-                                            for (int a = 1; a <= 7; a++) {
-                                                
-                                                out.print("<input type='text' class='form-control' value=\"" + rs.getString(a) + "\"><th>");
-                                                
-                                            }
-
-                                            out.print("<a href='Consultar.jsp'><button class='btn btn-info' id='GuardarPersona'><icon class='glyphicon glyphicon-save'></icon></button></a></th></tr>");
-                                        }
-
-                                        rs.close();
-                                    }
-                                    st.close();
-                                    System.out.print("Conexion Ralizada");
-
-                                } catch (Exception ex) {
-                                    out.print("<option value=\"0\" selected> No hay mas datos </option>");
-                                    System.out.println("No hay conexion");
-                                    ex.printStackTrace(System.err);
-                                }
-
-
-                            %>
-
-
-
-
-
-
+                            <td><%=BPBP.getIdPersona()%></td>
+                            <td><input value="<%=BPBP.getDocumento()%>"></td>
+                            <td><input value="<%=BPBP.getNombre()%>"></td>
+                            <td><input value="<%=BPBP.getNombre_2()%>"></td>
+                            <td><input value="<%=BPBP.getApellido_1()%>"></td>
+                            <td><input value="<%=BPBP.getApellido_2()%>"></td>
+                            <td><input value="<%=BPBP.getFecha_De_Nacimiento()%>"></td>
+                            <td><a href="Consultar.jsp" class=""><button type="submit" class="btn btn-primary glyphicon glyphicon-save"></button></a></td>
+                        </tr>
+                        
 
                 </tbody>
             </table>
